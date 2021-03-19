@@ -14,16 +14,26 @@ class Creating
      */
     public function handle($model)
     {
-        if (! $model->isUserstamping() || is_null($model->getCreatedByColumn())) {
-            return;
-        }
+        if ( !is_null(Auth::id()) ) {
+            if ( $model->isUserstamping() ) {
+                if ( !is_null($model->getCreatedByColumn()) ) {
+                    $model->{$model->getCreatedByColumn()} = Auth::id();
+                }
 
-        if (is_null($model->{$model->getCreatedByColumn()})) {
-            $model->{$model->getCreatedByColumn()} = Auth::id();
-        }
+                if ( !is_null($model->getUpdatedByColumn()) ) {
+                    $model->{$model->getUpdatedByColumn()} = Auth::id();
+                }
+            }
 
-        if (is_null($model->{$model->getUpdatedByColumn()}) && ! is_null($model->getUpdatedByColumn())) {
-            $model->{$model->getUpdatedByColumn()} = Auth::id();
+            //touch for user
+            foreach ($model->getTouchedRelations() as $relation) {
+                if ( $model->$relation->isUserstamping() ) {
+                    if ( !is_null($model->$relation->getUpdatedByColumn()) ) {
+                        $model->$relation->{$model->getUpdatedByColumn()} = Auth::id();
+                        $model->$relation->save();
+                    }
+                }
+            }
         }
     }
 }

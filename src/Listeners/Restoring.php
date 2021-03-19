@@ -12,10 +12,22 @@ class Restoring
      */
     public function handle($model)
     {
-        if (! $model->isUserstamping() || is_null($model->getDeletedByColumn())) {
-            return;
-        }
+        if ( !is_null(Auth::id()) ) {
+            if ( $model->isUserstamping() ) {
+                if ( !is_null($model->getDeletedByColumn()) ) {
+                    $model->{$model->getDeletedByColumn()} = null;
+                }
+            }
 
-        $model->{$model->getDeletedByColumn()} = null;
+            //touch for user
+            foreach ($model->getTouchedRelations() as $relation) {
+                if ( $model->$relation->isUserstamping() ) {
+                    if ( !is_null($model->$relation->getUpdatedByColumn()) ) {
+                        $model->$relation->{$model->getUpdatedByColumn()} = Auth::id();
+                        $model->$relation->save();
+                    }
+                }
+            }
+        }
     }
 }
