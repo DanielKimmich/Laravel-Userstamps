@@ -1,6 +1,6 @@
 <?php
-
-namespace Wildside\Userstamps\Listeners;
+//namespace Wildside\Userstamps\Listeners;
+namespace DaLiSoft\Userstamps\Listeners;
 
 use Illuminate\Support\Facades\Auth;
 

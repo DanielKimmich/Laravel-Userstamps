@@ -1,6 +1,6 @@
 <?php
-
-namespace Wildside\Userstamps;
+//namespace Wildside\Userstamps;
+namespace DaLiSoft\Userstamps;
 
 trait Userstamps
 {
@@ -30,12 +30,12 @@ trait Userstamps
      */
     public static function registerListeners()
     {
-        static::creating('Wildside\Userstamps\Listeners\Creating@handle');
-        static::updating('Wildside\Userstamps\Listeners\Updating@handle');
+        static::creating('DaLiSoft\Userstamps\Listeners\Creating@handle');
+        static::updating('DaLiSoft\Userstamps\Listeners\Updating@handle');
 
         if (static::usingSoftDeletes()) {
-            static::deleting('Wildside\Userstamps\Listeners\Deleting@handle');
-            static::restoring('Wildside\Userstamps\Listeners\Restoring@handle');
+            static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
+            static::restoring('DaLiSoft\Userstamps\Listeners\Restoring@handle');
         }
     }
 
@@ -148,4 +148,22 @@ trait Userstamps
     {
         return config('auth.providers.users.model');
     }
+
+    /**
+     * Get the user name.
+     */
+
+    Public function getCreatedByUserAttribute()
+    {
+        return $this->creator->name ?? '';
+    }
+    Public function getUpdatedByUserAttribute()
+    {
+        return $this->editor->name ?? '';
+    }
+    Public function getDeletedByUserAttribute()
+    {
+        return $this->destroyer->name ?? '';
+    }
+
 }

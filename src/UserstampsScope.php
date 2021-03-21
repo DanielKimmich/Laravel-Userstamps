@@ -1,6 +1,6 @@
 <?php
-
-namespace Wildside\Userstamps;
+//namespace Wildside\Userstamps;
+namespace DaLiSoft\Userstamps;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
