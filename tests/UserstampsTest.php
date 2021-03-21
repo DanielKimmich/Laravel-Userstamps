@@ -6,7 +6,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase;
-use Wildside\Userstamps\Userstamps;
+//use Wildside\Userstamps\Userstamps;
+use DaLiSoft\Userstamps\Userstamps;
 
 class UserstampsTest extends TestCase
 {
