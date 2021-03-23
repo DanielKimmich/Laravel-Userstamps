@@ -32,9 +32,10 @@ trait Userstamps
     {
         static::creating('DaLiSoft\Userstamps\Listeners\Creating@handle');
         static::updating('DaLiSoft\Userstamps\Listeners\Updating@handle');
-
-        if (static::usingSoftDeletes()) {
             static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
+            
+        if (static::usingSoftDeletes()) {
+         //   static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
             static::restoring('DaLiSoft\Userstamps\Listeners\Restoring@handle');
         }
     }
