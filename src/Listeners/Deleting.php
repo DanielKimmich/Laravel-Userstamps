@@ -25,7 +25,7 @@ class Deleting
                 }
             }
 
-            if ( $model->isUserstamping() && $model->usingSoftDeletes() ) {
+            if ( $model->isUserstamping() && $model->getUsingSoftDeletes() ) {
                 if ( !is_null($model->getDeletedByColumn()) ) {
                     if (is_null($model->{$model->getDeletedByColumn()})) {
                         $model->{$model->getDeletedByColumn()} = Auth::id();

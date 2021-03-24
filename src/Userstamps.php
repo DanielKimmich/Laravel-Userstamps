@@ -10,6 +10,7 @@ trait Userstamps
      * @param bool
      */
     protected $userstamping = true;
+    static protected $usingSoftDeletes = null;
 
 
     /**
@@ -35,7 +36,8 @@ trait Userstamps
         static::updating('DaLiSoft\Userstamps\Listeners\Updating@handle');
         static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
             
-        if (static::usingSoftDeletes()) {
+        static::setUsingSoftDeletes();
+        if (static::$usingSoftDeletes) {
          //   static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
             static::restoring('DaLiSoft\Userstamps\Listeners\Restoring@handle');
         }
@@ -44,18 +46,30 @@ trait Userstamps
     /**
      * Has the model loaded the SoftDeletes trait.
      *
-     * @return bool
+     * @return void
      */
-    public static function usingSoftDeletes()
+    public static function setUsingSoftDeletes()
     {
-        static $usingSoftDeletes;
+      //  static $usingSoftDeletes;
 
-        if (is_null($usingSoftDeletes)) {
-            return $usingSoftDeletes = in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses_recursive(get_called_class()));
+        if (is_null(static::$usingSoftDeletes)) {
+            static::$usingSoftDeletes = in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses_recursive(get_called_class()));
         }
 
-        return $usingSoftDeletes;
+       // return $usingSoftDeletes;
     }
+
+    /**
+     * Check if we're maintaing UsingSoftDeletes on the model.
+     *
+     * @return bool
+     */
+    public function getUsingSoftDeletes()
+    {
+        return static::$usingSoftDeletes;
+    }
+
+
 
     /**
      * Get the user that created the model.

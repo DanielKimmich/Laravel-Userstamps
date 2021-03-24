@@ -23,7 +23,7 @@ class Creating
                 }
 
                 if ( !is_null($model->getUpdatedByColumn()) ) {
-                     if (is_null($model->{$model->getUpdatedByColumn()}) {
+                     if (is_null($model->{$model->getUpdatedByColumn()}) ) {
                         $model->{$model->getUpdatedByColumn()} = Auth::id();
                     }
                 }
