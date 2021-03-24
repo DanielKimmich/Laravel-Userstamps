@@ -17,11 +17,15 @@ class Creating
         if ( !is_null(Auth::id()) ) {
             if ( $model->isUserstamping() ) {
                 if ( !is_null($model->getCreatedByColumn()) ) {
-                    $model->{$model->getCreatedByColumn()} = Auth::id();
+                    if (is_null($model->{$model->getCreatedByColumn()}) ) {
+                        $model->{$model->getCreatedByColumn()} = Auth::id();
+                    }
                 }
 
                 if ( !is_null($model->getUpdatedByColumn()) ) {
-                    $model->{$model->getUpdatedByColumn()} = Auth::id();
+                     if (is_null($model->{$model->getUpdatedByColumn()}) {
+                        $model->{$model->getUpdatedByColumn()} = Auth::id();
+                    }
                 }
             }
 

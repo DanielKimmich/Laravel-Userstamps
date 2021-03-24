@@ -11,6 +11,7 @@ trait Userstamps
      */
     protected $userstamping = true;
 
+
     /**
      * Boot the userstamps trait for a model.
      *
@@ -32,7 +33,7 @@ trait Userstamps
     {
         static::creating('DaLiSoft\Userstamps\Listeners\Creating@handle');
         static::updating('DaLiSoft\Userstamps\Listeners\Updating@handle');
-            static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
+        static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');
             
         if (static::usingSoftDeletes()) {
          //   static::deleting('DaLiSoft\Userstamps\Listeners\Deleting@handle');

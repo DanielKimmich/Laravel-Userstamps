@@ -25,17 +25,16 @@ class Deleting
                 }
             }
 
-            if ( $model->isUserstamping() ) {
+            if ( $model->isUserstamping() && $model->usingSoftDeletes() ) {
                 if ( !is_null($model->getDeletedByColumn()) ) {
-                    $model->{$model->getDeletedByColumn()} = Auth::id();
+                    if (is_null($model->{$model->getDeletedByColumn()})) {
+                        $model->{$model->getDeletedByColumn()} = Auth::id();
+                    }
                 }
 
                 $dispatcher = $model->getEventDispatcher();
-
                 $model->unsetEventDispatcher();
-
                 $model->save();
-
                 $model->setEventDispatcher($dispatcher);
             }
         }
