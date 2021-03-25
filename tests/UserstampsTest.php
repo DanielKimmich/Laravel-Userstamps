@@ -39,6 +39,8 @@ class UserstampsTest extends TestCase
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
             $table->string('remember_token')->nullable();
         });
 
@@ -56,11 +58,15 @@ class UserstampsTest extends TestCase
         });
 
         TestUser::create([
-            'id' => 1,
+            'id'    => 1,
+            'name'  => 'Da',
+            'email' => 'da@dalisoft.com',
         ]);
 
         TestUser::create([
             'id' => 2,
+            'name'  => 'Li',
+            'email' => 'li@dalisoft.com',
         ]);
     }
 
@@ -391,6 +397,61 @@ class UserstampsTest extends TestCase
         $this->assertEquals(2, $foo->alt_updated_by);
         $this->assertEquals(2, $foo->alt_deleted_by);
     }
+
+    public function testIsCreatorMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(1);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals(true, $foo->isCreator(1));
+    }
+
+    public function testIsNotCreatorMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(2);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals(false, $foo->isCreator(1));
+    }
+
+    public function testCreatedByUserMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(1);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals('Da', $foo->getCreatedByUserAttribute());
+    }
+
+    public function testUpdatedByUserMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(2);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals('Li', $foo->getUpdatedByUserAttribute());
+    }
+
+    public function testCreatedByUserEmailMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(1);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals('da@dalisoft.com', $foo->getCreatedByUserAttribute('email'));
+    }
+
+    public function testUpdatedByUserEmailMethodWorks()
+    {
+        $this->app['auth']->loginUsingId(2);
+
+        $foo = $this->createFoo();
+
+        $this->assertEquals('li@dalisoft.com', $foo->getUpdatedByUserAttribute('email'));
+    }
+
 }
 
 class Foo extends Model
@@ -440,3 +501,4 @@ class TestUser extends Authenticatable
     public $timestamps = false;
     protected $guarded = [];
 }
+

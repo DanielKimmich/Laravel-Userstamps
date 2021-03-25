@@ -50,5 +50,6 @@ class UserstampsScope implements Scope
 
             return $builder->delete();
         });
+
     }
 }

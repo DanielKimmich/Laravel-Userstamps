@@ -1,6 +1,7 @@
 <?php
 //namespace Wildside\Userstamps;
 namespace DaLiSoft\Userstamps;
+use Illuminate\Support\Facades\Auth;
 
 trait Userstamps
 {
@@ -165,21 +166,28 @@ trait Userstamps
         return config('auth.providers.users.model');
     }
 
+    public function isCreator($user_id=null) {
+        if( !isset($user_id) ) {
+            $user_id == Auth::id();
+        }
+        return $this->{$this->getCreatedByColumn()} == $user_id;
+    }
+
     /**
      * Get the user name.
      */
 
-    Public function getCreatedByUserAttribute()
+    Public function getCreatedByUserAttribute($by_column='name')
     {
-        return $this->creator->name ?? '';
+        return $this->creator->{$by_column} ?? '';
     }
-    Public function getUpdatedByUserAttribute()
+    Public function getUpdatedByUserAttribute($by_column='name')
     {
-        return $this->editor->name ?? '';
+        return $this->editor->{$by_column} ?? '';
     }
-    Public function getDeletedByUserAttribute()
+    Public function getDeletedByUserAttribute($by_column='name')
     {
-        return $this->destroyer->name ?? '';
+        return $this->destroyer->{$by_column} ?? '';
     }
 
 }
