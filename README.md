@@ -1,15 +1,12 @@
 <p align="center">
-   <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/v/stable.svg" alt="Latest Stable Version">
+   <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/v/stable.svg" alt="Latest Stable Version">
     </a>
-    <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/d/total.svg" alt="Total Downloads">
+    <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/d/total.svg" alt="Total Downloads">
     </a>
-     <a href="https://travis-ci.com/WildSideUK/Laravel-Userstamps">
-        <img src="https://travis-ci.com/WildSideUK/Laravel-Userstamps.svg" alt="Build Status">
-    </a>
-    <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/license.svg" alt="License">
+     <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/license.svg" alt="License">
     </a>
 </p>
 
