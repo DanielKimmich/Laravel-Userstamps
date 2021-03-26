@@ -1,3 +1,5 @@
+# Laravel Userstamps
+
 <p align="center">
    <a href="https://packagist.org/packages/dalisoft/userstamps">
         <img src="https://poser.pugx.org/dalisoft/userstamps/v/stable.svg" alt="Latest Stable Version">
@@ -10,7 +12,7 @@
     </a>
 </p>
 
-## About Laravel Userstamps
+## About
 
 Laravel Userstamps provides an Eloquent trait which automatically maintains `created_by` and `updated_by` columns on your model, populated by the currently authenticated user in your application.
 
@@ -23,7 +25,7 @@ This package requires Laravel 5.2 or later running on PHP 5.6 or higher.
 This package can be installed using composer:
 
 ````
-composer require wildside/userstamps
+composer require dalisoft/userstamps
 ````
 
 ## Usage
