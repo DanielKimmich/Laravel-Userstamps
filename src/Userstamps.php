@@ -174,19 +174,22 @@ trait Userstamps
     }
 
     /**
-     * Get the user name.
+     * Get the user name / email, etc.
      */
 
-    Public function getCreatedByUserAttribute($by_column='name')
+    Public function getCreatedByUserNameAttribute()
     {
+        $by_column=defined('static::USER_BY_NAME') ? static::USER_BY_NAME : 'name';
         return $this->creator->{$by_column} ?? '';
     }
-    Public function getUpdatedByUserAttribute($by_column='name')
+    Public function getUpdatedByUserNameAttribute()
     {
+        $by_column=defined('static::USER_BY_NAME') ? static::USER_BY_NAME : 'name';
         return $this->editor->{$by_column} ?? '';
     }
-    Public function getDeletedByUserAttribute($by_column='name')
+    Public function getDeletedByUserNameAttribute()
     {
+        $by_column=defined('static::USER_BY_NAME') ? static::USER_BY_NAME : 'name';
         return $this->destroyer->{$by_column} ?? '';
     }
 

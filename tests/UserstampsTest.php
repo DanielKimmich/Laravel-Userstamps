@@ -416,40 +416,40 @@ class UserstampsTest extends TestCase
         $this->assertEquals(false, $foo->isCreator(1));
     }
 
-    public function testCreatedByUserMethodWorks()
+    public function testCreatedByUserNameMethodWorks()
     {
         $this->app['auth']->loginUsingId(1);
 
         $foo = $this->createFoo();
 
-        $this->assertEquals('Da', $foo->getCreatedByUserAttribute());
+        $this->assertEquals('Da', $foo->created_by_user_name);
     }
 
-    public function testUpdatedByUserMethodWorks()
+    public function testUpdatedByUserNameMethodWorks()
     {
         $this->app['auth']->loginUsingId(2);
 
         $foo = $this->createFoo();
 
-        $this->assertEquals('Li', $foo->getUpdatedByUserAttribute());
+        $this->assertEquals('Li', $foo->updated_by_user_name);
     }
 
     public function testCreatedByUserEmailMethodWorks()
     {
         $this->app['auth']->loginUsingId(1);
 
-        $foo = $this->createFoo();
+        $foo = $this->createFooWithCustomColumnNames();
 
-        $this->assertEquals('da@dalisoft.com', $foo->getCreatedByUserAttribute('email'));
+        $this->assertEquals('da@dalisoft.com', $foo->created_by_user_name);
     }
 
     public function testUpdatedByUserEmailMethodWorks()
     {
         $this->app['auth']->loginUsingId(2);
 
-        $foo = $this->createFoo();
+        $foo = $this->createFooWithCustomColumnNames();
 
-        $this->assertEquals('li@dalisoft.com', $foo->getUpdatedByUserAttribute('email'));
+        $this->assertEquals('li@dalisoft.com', $foo->updated_by_user_name);
     }
 
 }
@@ -481,6 +481,7 @@ class FooWithCustomColumnNames extends Model
     const CREATED_BY = 'alt_created_by';
     const UPDATED_BY = 'alt_updated_by';
     const DELETED_BY = 'alt_deleted_by';
+    const USER_BY_NAME = 'email';
 }
 
 class FooWithNullColumnNames extends Model
