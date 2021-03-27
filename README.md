@@ -14,9 +14,9 @@
 
 ## About
 
-Laravel Userstamps provides an Eloquent trait which automatically maintains `created_by` and `updated_by` columns on your model, populated by the currently authenticated user in your application.
+Laravel Userstamps is a Laravel package for your Eloquent Model users fields: `created_by`, `updated_by` and `deleted_by`. This package automatically inserts/updates an user id on your table on who created, last updated and deleted the record.
 
-When using the Laravel `SoftDeletes` trait, a `deleted_by` column is also handled by this package.
+When using the Laravel `SoftDeletes` trait, a `deleted_by` colummn is also handled by this package.
 
 ## Installing
 
@@ -46,7 +46,7 @@ $table->unsignedBigInteger('updated_by')->nullable();
 You can now load the trait within your model, and userstamps will automatically be maintained:
 
 ```php
-use Wildside\Userstamps\Userstamps;
+use DaLiSoft\Userstamps\Userstamps;
 
 class Foo extends Model {
 
@@ -57,7 +57,7 @@ class Foo extends Model {
 Optionally, should you wish to override the names of the `created_by`, `updated_by` or `deleted_by` columns, you can do so by setting the appropriate class constants on your model. Ensure you match these column names in your migration.
 
 ```php
-use Wildside\Userstamps\Userstamps;
+use DaLiSoft\Userstamps\Userstamps;
 
 class Foo extends Model {
 
