@@ -4,11 +4,11 @@
    <a href="https://packagist.org/packages/dalisoft/userstamps">
         <img src="https://poser.pugx.org/dalisoft/userstamps/v/stable.svg" alt="Latest Stable Version">
     </a>
-    <a href="https://packagist.org/packages/dalisoft/userstamps">
-        <img src="https://poser.pugx.org/dalisoft/userstamps/d/total.svg" alt="Total Downloads">
-    </a>
      <a href="https://packagist.org/packages/dalisoft/userstamps">
         <img src="https://poser.pugx.org/dalisoft/userstamps/license.svg" alt="License">
+    </a>
+    <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/d/total.svg" alt="Total Downloads">
     </a>
 </p>
 
@@ -129,13 +129,13 @@ $model->where('name', 'foo')->updateWithUserstamps([
 ]);
 ```
 
-## Sponsors
+## References
 
-<a href="https://wildside.uk">
-    <img src="https://wildside.uk/images/wildside-logo.svg" height="50">
-</a>
+This project was developed using the <a href="https://github.com/WildsideUK/Laravel-Userstamps">WILDSIDE</a> project.
 
-This open-source software is developed and maintained by <a href="https://wildside.uk">WILDSIDE</a>.
+I have added new qualities to the package, such as getting the name or email of the user who created, updated and unregistered.
+
+The functionality was also added to update the user in a parent table when creating, modifying, or deleting a record in the child table.
 
 ## License
 
