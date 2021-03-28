@@ -31,7 +31,7 @@ composer require dalisoft/userstamps
 ## Configuration
 
 ## Usage
-# On Migrations
+### On Migrations
 Your model will need to include a `created_by` and `updated_by` column, defaulting to `null`.
 
 If using the Laravel `SoftDeletes` trait, it will also need a `deleted_by` column.
@@ -45,7 +45,7 @@ $table->unsignedBigInteger('created_by')->nullable();
 $table->unsignedBigInteger('updated_by')->nullable();
 ```
 
-# Attaching to Model
+### Attaching to Model
 You can now load the trait within your model, and userstamps will automatically be maintained:
 
 ```php
@@ -57,7 +57,7 @@ class Foo extends Model {
 }
 ```
 
-# custom attributes
+### custom attributes
 Optionally, should you wish to override the names of the `created_by`, `updated_by` or `deleted_by` columns, you can do so by setting the appropriate class constants on your model. Ensure you match these column names in your migration.
 
 ```php
