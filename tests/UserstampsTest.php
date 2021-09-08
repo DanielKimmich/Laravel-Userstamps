@@ -6,8 +6,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase;
-//use Wildside\Userstamps\Userstamps;
 use DaLiSoft\Userstamps\Userstamps;
+//use DaLiSoft\Userstamps\UserStampServiceProvide;
+
 
 class UserstampsTest extends TestCase
 {
@@ -33,7 +34,22 @@ class UserstampsTest extends TestCase
         ]);
 
         $app['config']->set('hashing', ['driver' => 'bcrypt']);
+
+        //ServiceProvide
+        Blueprint::macro(
+            'userstamps', function () {
+                $this->unsignedBigInteger('created_by')->nullable()
+                    ->index();
+                $this->unsignedBigInteger('updated_by')->nullable()
+                    ->index();
+                $this->unsignedBigInteger('deleted_by')->nullable()
+                    ->index();
+            }
+        );
+
+
     }
+
 
     protected static function handleSetUp()
     {
@@ -49,9 +65,10 @@ class UserstampsTest extends TestCase
             $table->string('bar');
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
+//            $table->unsignedBigInteger('created_by')->nullable();
+//            $table->unsignedBigInteger('updated_by')->nullable();
+//            $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->userstamps();
             $table->unsignedBigInteger('alt_created_by')->nullable();
             $table->unsignedBigInteger('alt_updated_by')->nullable();
             $table->unsignedBigInteger('alt_deleted_by')->nullable();
@@ -451,6 +468,7 @@ class UserstampsTest extends TestCase
 
         $this->assertEquals('li@dalisoft.com', $foo->updated_by_user_name);
     }
+
 
 }
 

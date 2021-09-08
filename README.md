@@ -30,7 +30,7 @@ This package requires Laravel 5.2 or later running on PHP 5.6 or higher.
 This package can be installed using composer:
 
 ````
-composer require wildside/userstamps
+composer require dalisoft/userstamps
 ````
 
 ## Usage
