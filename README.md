@@ -1,29 +1,24 @@
-<p align="center">
-    <img src="https://s3-eu-west-1.amazonaws.com/ws.hosted/userstamps-logo.svg" width="300">
-</p>
+# Laravel Userstamps
 
 <p align="center">
-    <a href="https://travis-ci.com/WildSideUK/Laravel-Userstamps">
-        <img src="https://travis-ci.com/WildSideUK/Laravel-Userstamps.svg" alt="Build Status">
+   <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/v/stable.svg" alt="Latest Stable Version">
     </a>
-    <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/d/total.svg" alt="Total Downloads">
+     <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/license.svg" alt="License">
     </a>
-    <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/v/stable.svg" alt="Latest Stable Version">
-    </a>
-    <a href="https://packagist.org/packages/wildside/userstamps">
-        <img src="https://poser.pugx.org/wildside/userstamps/license.svg" alt="License">
+    <a href="https://packagist.org/packages/dalisoft/userstamps">
+        <img src="https://poser.pugx.org/dalisoft/userstamps/d/total.svg" alt="Total Downloads">
     </a>
 </p>
 
-## About Laravel Userstamps
+## About
 
-Laravel Userstamps provides an Eloquent trait which automatically maintains `created_by` and `updated_by` columns on your model, populated by the currently authenticated user in your application.
+Laravel Userstamps is a Laravel package for your Eloquent Model users fields: `created_by`, `updated_by` and `deleted_by`. This package automatically inserts/updates an user id on your table on who created, last updated and deleted the record.
 
-When using the Laravel `SoftDeletes` trait, a `deleted_by` column is also handled by this package.
+When using the Laravel `SoftDeletes` trait, a `deleted_by` colummn is also handled by this package.
 
-## Installing
+## Installation
 
 This package requires Laravel 5.2 or later running on PHP 5.6 or higher.
 
@@ -33,8 +28,10 @@ This package can be installed using composer:
 composer require dalisoft/userstamps
 ````
 
-## Usage
+## Configuration
 
+## Usage
+### On Migrations
 Your model will need to include a `created_by` and `updated_by` column, defaulting to `null`.
 
 If using the Laravel `SoftDeletes` trait, it will also need a `deleted_by` column.
@@ -48,10 +45,11 @@ $table->unsignedBigInteger('created_by')->nullable();
 $table->unsignedBigInteger('updated_by')->nullable();
 ```
 
+### Attaching to Model
 You can now load the trait within your model, and userstamps will automatically be maintained:
 
 ```php
-use Wildside\Userstamps\Userstamps;
+use DaLiSoft\Userstamps\Userstamps;
 
 class Foo extends Model {
 
@@ -59,10 +57,11 @@ class Foo extends Model {
 }
 ```
 
+### custom attributes
 Optionally, should you wish to override the names of the `created_by`, `updated_by` or `deleted_by` columns, you can do so by setting the appropriate class constants on your model. Ensure you match these column names in your migration.
 
 ```php
-use Wildside\Userstamps\Userstamps;
+use DaLiSoft\Userstamps\Userstamps;
 
 class Foo extends Model {
 
@@ -134,13 +133,13 @@ $model->where('name', 'foo')->updateWithUserstamps([
 ]);
 ```
 
-## Sponsors
+## References
 
-<a href="https://wildside.uk">
-    <img src="https://wildside.uk/images/wildside-logo.svg" height="50">
-</a>
+This project was developed using the <a href="https://github.com/WildsideUK/Laravel-Userstamps">WILDSIDE</a> project.
 
-This open-source software is developed and maintained by <a href="https://wildside.uk">WILDSIDE</a>.
+I have added new qualities to the package, such as getting the name or email of the user who created, updated and unregistered.
+
+The functionality was also added to update the user in a parent table when creating, modifying, or deleting a record in the child table.
 
 ## License
 
