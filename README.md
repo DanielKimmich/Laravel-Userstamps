@@ -29,20 +29,49 @@ composer require dalisoft/userstamps
 ````
 
 ## Configuration
+Register the ServiceProvider in your config/app.php service provider list.
+
+config/app.php
+````
+return [
+    //other
+    'providers' => [
+        //other
+        \DaLiSoft\Userstamps\UserStampServiceProvider::class,
+    ];
+];
+````
 
 ## Usage
 ### On Migrations
 Your model will need to include a `created_by` and `updated_by` column, defaulting to `null`.
-
 If using the Laravel `SoftDeletes` trait, it will also need a `deleted_by` column.
 
 The column type should match the type of the ID colummn in your user's table. In Laravel <= 5.7 this defaults to `unsignedInteger`. For Laravel >= 5.8 this defaults to `unsignedBigInteger`.
 
-An example migration:
+You can use the Blueprint method "userstamps()" and add created_by, updated_by and deleted_by.
 
+An example migration with Blueprint method:
 ```php
-$table->unsignedBigInteger('created_by')->nullable();
-$table->unsignedBigInteger('updated_by')->nullable();
+Schema::create('mytable', function (Blueprint $table) {
+    $table->userstamps();
+});
+```
+
+An example migration add user stamp field:
+```php
+Schema::create('mytable', function (Blueprint $table) {
+    $table->unsignedInteger('created_by')->nullable();
+    $table->unsignedInteger('updated_by')->nullable();
+    $table->unsignedInteger('deleted_by')->nullable();
+});
+```
+
+An example migration drop auditable columns:
+```php
+Schema::create('mytable', function (Blueprint $table) {
+    $table->dropUserstamps();
+});
 ```
 
 ### Attaching to Model
