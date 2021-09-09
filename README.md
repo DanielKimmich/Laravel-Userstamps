@@ -37,7 +37,7 @@ return [
     //other
     'providers' => [
         //other
-        \DaLiSoft\Userstamps\UserStampServiceProvider::class,
+        DaLiSoft\Userstamps\UserStampServiceProvider::class,
     ];
 ];
 ````
@@ -49,11 +49,12 @@ If using the Laravel `SoftDeletes` trait, it will also need a `deleted_by` colum
 
 The column type should match the type of the ID colummn in your user's table. In Laravel <= 5.7 this defaults to `unsignedInteger`. For Laravel >= 5.8 this defaults to `unsignedBigInteger`.
 
-You can use the Blueprint method "userstamps()" and add created_by, updated_by and deleted_by.
+You can use the Blueprint method `userstamps()` and add created_by, updated_by and deleted_by.
 
 An example migration with Blueprint method:
 ```php
 Schema::create('mytable', function (Blueprint $table) {
+
     $table->userstamps();
 });
 ```
@@ -61,6 +62,7 @@ Schema::create('mytable', function (Blueprint $table) {
 An example migration add user stamp field:
 ```php
 Schema::create('mytable', function (Blueprint $table) {
+
     $table->unsignedInteger('created_by')->nullable();
     $table->unsignedInteger('updated_by')->nullable();
     $table->unsignedInteger('deleted_by')->nullable();
@@ -70,6 +72,7 @@ Schema::create('mytable', function (Blueprint $table) {
 An example migration drop auditable columns:
 ```php
 Schema::create('mytable', function (Blueprint $table) {
+
     $table->dropUserstamps();
 });
 ```
@@ -95,7 +98,6 @@ use DaLiSoft\Userstamps\Userstamps;
 class Foo extends Model {
 
     use Userstamps;
-
     const CREATED_BY = 'alt_created_by';
     const UPDATED_BY = 'alt_updated_by';
     const DELETED_BY = 'alt_deleted_by';

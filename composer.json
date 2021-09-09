@@ -12,9 +12,9 @@
     ],
     "authors": [
         {
-            "name": "WILDSIDE",
-            "email": "hello@wildside.uk",
-            "homepage": "https://wildside.uk"
+            "name": "Daniel Kimmich",
+            "email": "danielkimmich72@gmail.com",
+            "homepage": "https://www.instagram.com/dfkimmich/"
         }
     ],
     "require": {
@@ -30,5 +30,14 @@
         "psr-4": {
             "DaLiSoft\\Userstamps\\": "src"
         }
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DaLiSoft\\Userstamps\\UserStampServiceProvider"
+            ]
+        }
+    },
+
+
 }
