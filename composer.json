@@ -13,8 +13,7 @@
     "authors": [
         {
             "name": "Daniel Kimmich",
-            "email": "danielkimmich72@gmail.com",
-            "homepage": "https://www.instagram.com/dfkimmich/"
+            "email": "danielkimmich72@gmail.com"
         }
     ],
     "require": {
@@ -37,5 +36,7 @@
                 "DaLiSoft\\Userstamps\\UserStampServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
