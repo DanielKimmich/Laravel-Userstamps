@@ -91,6 +91,7 @@ class Foo extends Model {
 
 ### custom attributes
 Optionally, should you wish to override the names of the `created_by`, `updated_by` or `deleted_by` columns, you can do so by setting the appropriate class constants on your model. Ensure you match these column names in your migration.
+You can also set the name of the `display_user` column that you want to return in the methods, by default it returns name.
 
 ```php
 use DaLiSoft\Userstamps\Userstamps;
@@ -101,6 +102,7 @@ class Foo extends Model {
     const CREATED_BY = 'alt_created_by';
     const UPDATED_BY = 'alt_updated_by';
     const DELETED_BY = 'alt_deleted_by';
+    const DISPLAY_USER = 'email';
 }
 ```
 
@@ -117,6 +119,14 @@ Methods are also available to temporarily stop the automatic maintaining of user
 ```php
 $model->stopUserstamping(); // stops userstamps being maintained on the model
 $model->startUserstamping(); // resumes userstamps being maintained on the model
+```
+
+There are also attributes available to get the name / mail / ... of the creator, editor and destroyer user in their models:
+
+```php
+$model->created_by_user; // creator username in the model
+$model->updated_by_user; // editor username in the model
+$model->deleted_by_user; // destroyer username in the model
 ```
 
 ## Workarounds

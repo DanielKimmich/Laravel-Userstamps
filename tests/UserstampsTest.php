@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase;
 use DaLiSoft\Userstamps\Userstamps;
-//use DaLiSoft\Userstamps\UserStampServiceProvide;
+use DaLiSoft\Userstamps\UserStampServiceProvider;
 
 
 class UserstampsTest extends TestCase
@@ -36,6 +36,14 @@ class UserstampsTest extends TestCase
         $app['config']->set('hashing', ['driver' => 'bcrypt']);
 
         //ServiceProvide
+  //      $this->app->register('DaLiSoft\Userstamps\UserStampServiceProvider');
+  //      $this->app->instance('UserStampServiceProvider',$mockedService);
+  //      $this->app->bind(UserStampServiceProvider::class,$mockedService);
+ //       $this->app->bind(UsersService::class, function() {
+ //           return new UsersDummy();
+ //       });
+
+
         Blueprint::macro(
             'userstamps', function () {
                 $this->unsignedBigInteger('created_by')->nullable()
@@ -439,7 +447,7 @@ class UserstampsTest extends TestCase
 
         $foo = $this->createFoo();
 
-        $this->assertEquals('Da', $foo->created_by_user_name);
+        $this->assertEquals('Da', $foo->created_by_user);
     }
 
     public function testUpdatedByUserNameMethodWorks()
@@ -448,7 +456,7 @@ class UserstampsTest extends TestCase
 
         $foo = $this->createFoo();
 
-        $this->assertEquals('Li', $foo->updated_by_user_name);
+        $this->assertEquals('Li', $foo->updated_by_user);
     }
 
     public function testCreatedByUserEmailMethodWorks()
@@ -457,7 +465,7 @@ class UserstampsTest extends TestCase
 
         $foo = $this->createFooWithCustomColumnNames();
 
-        $this->assertEquals('da@dalisoft.com', $foo->created_by_user_name);
+        $this->assertEquals('da@dalisoft.com', $foo->created_by_user);
     }
 
     public function testUpdatedByUserEmailMethodWorks()
@@ -466,7 +474,7 @@ class UserstampsTest extends TestCase
 
         $foo = $this->createFooWithCustomColumnNames();
 
-        $this->assertEquals('li@dalisoft.com', $foo->updated_by_user_name);
+        $this->assertEquals('li@dalisoft.com', $foo->updated_by_user);
     }
 
 
@@ -499,7 +507,7 @@ class FooWithCustomColumnNames extends Model
     const CREATED_BY = 'alt_created_by';
     const UPDATED_BY = 'alt_updated_by';
     const DELETED_BY = 'alt_deleted_by';
-    const USER_BY_NAME = 'email';
+    const DISPLAY_USER = 'email';
 }
 
 class FooWithNullColumnNames extends Model
