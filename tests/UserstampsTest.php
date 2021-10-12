@@ -21,6 +21,14 @@ class UserstampsTest extends TestCase
         'UserstampsTest::handleSetup',
     ];
 
+    protected function getPackageProviders($app)
+    {
+        return [
+            UserStampServiceProvider::class,
+        ];
+    }
+
+
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('app.debug', 'true');
@@ -43,7 +51,7 @@ class UserstampsTest extends TestCase
  //           return new UsersDummy();
  //       });
 
-
+/*
         Blueprint::macro(
             'userstamps', function () {
                 $this->unsignedBigInteger('created_by')->nullable()
@@ -54,7 +62,7 @@ class UserstampsTest extends TestCase
                     ->index();
             }
         );
-
+*/
 
     }
 
